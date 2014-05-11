@@ -1,0 +1,8 @@
+{
+  "packages": {
+    "iron-router": {},
+    "iron-router-progress": {},
+    "less-bootstrap-3": {},
+    "moment": {}
+  }
+}
