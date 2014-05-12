@@ -4,5 +4,12 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-autopublish
-insecure
+coffeescript
+less
+accounts-base
+accounts-password
+iron-router
+iron-router-progress
+less-bootstrap-3
+moment
+jade
