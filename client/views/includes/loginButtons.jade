@@ -1,0 +1,11 @@
+template(name="loginButtons")
+  with loggedUser
+    li.dropdown
+      a.dropdown-toggle(data-toggle="dropdown") #{profile.name}
+        b.caret
+      ul.dropdown-menu
+        li
+          a Logout
+  else
+    li.navbar-form
+      button.btn.btn-primary(type="submit") Login

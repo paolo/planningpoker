@@ -8,5 +8,7 @@ template(name="layout")
           span.icon-bar
           span.icon-bar
         a.navbar-brand(href="{{pathFor 'index'}}") Planning Poker
-  div.container
-    +yield
+      #header.navbar-collapse.collapse
+        ul.nav.navbar-nav.navbar-right
+          +loginButtons
+  +yield
