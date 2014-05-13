@@ -13,9 +13,9 @@ template(name="index")
         p Who said planning can't be fun? Create you account o login so you can start hosting your planning sessions
         p
           .col-xs-6.text-right
-            a.btn.btn-primary Sing Up
+            a.btn.btn-primary(href="{{pathFor 'signUp'}}") Sing Up
           .col-xs-6.text-left
-            a.btn.btn-primary Log In
+            a.btn.btn-primary(href="{{pathFor 'login'}}") Log In
   .container
     .row
       .col-sm-4
