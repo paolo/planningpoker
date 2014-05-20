@@ -1,0 +1,11 @@
+template(name="planningSessionEdit")
+  .container
+    .row
+      .col-xs-12
+        h1 Set up your planning session
+        .form
+          .form-group
+            input.form-control(type="text", name="name", value="{{name}}", placeholder="Name")
+          .form-group
+            input.form-control(type="text", name="goal", placeholder="The Session's main goal")
+          button.btn.btn-primary(type="submit") Start Now!
