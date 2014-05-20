@@ -1,6 +1,6 @@
 Router.map () ->
   @route 'planningSessionEdit',
-    path: "/plan/:_id/edit"
+    path: "/plans/:_id/edit"
     controller: 'PlanningSessionsController'
     action: 'edit'
 
