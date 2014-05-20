@@ -1,9 +1,11 @@
 template(name="loginButtons")
   with loggedUser
     li.dropdown
-      a.dropdown-toggle(data-toggle="dropdown") #{username}
+      a.dropdown-toggle(data-toggle="dropdown") #{displayName}
         b.caret
       ul.dropdown-menu
+        li
+          a(href="{{pathFor 'settings'}}") Settings
         li
           a(href="{{pathFor 'logout'}}") Logout
   else
