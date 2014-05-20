@@ -9,7 +9,7 @@
     if !userId || userId != doc.owner
       throw Meteor.Error 403, 'You\'re not authorized to perform this operation'
     true
-  delete: (userId, doc) ->
+  remove: (userId, doc) ->
     if !userId || userId != doc.owner
       throw Meteor.Error 403, 'You\'re not authorized to perform this operation'
     true
