@@ -10,9 +10,9 @@ template(name="userSettings")
             .col-sm-8
               input.form-control(name="username", placeholder="Username", value="{{user.username}}", readonly="readonly")
           .form-group
-            label.col-sm-4.control-label(for="fullName") Full Name:
+            label.col-sm-4.control-label(for="name") Full Name:
             .col-sm-8
-              input.form-control(name="fullName", placeholder="Full Name", value="{{user.profile.fullName}}")
+              input.form-control(name="name", placeholder="Full Name", value="{{user.profile.name}}")
           .form-group
             label.col-sm-4.control-label(for="pt.token") PivotalTracker API Token
             .col-sm-8
