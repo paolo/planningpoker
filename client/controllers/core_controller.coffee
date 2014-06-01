@@ -1,6 +1,6 @@
 class @CoreController extends RouteController
-  data:
-    loggedUser: ->
+  data: ->
+    loggedUser:
       Meteor.users.findOne Meteor.userId()
   index: ->
     @render 'index'
