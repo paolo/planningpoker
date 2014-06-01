@@ -1,0 +1,20 @@
+template(name="userSettings")
+  .container
+    .row
+      .col-xs-12.col-sm-6
+        h1 Account Settings
+        hr
+        form.form-horizontal
+          .form-group
+            label.col-sm-4.control-label(for="username") Username:
+            .col-sm-8
+              input.form-control(name="username", placeholder="Username", value="{{user.username}}", readonly="readonly")
+          .form-group
+            label.col-sm-4.control-label(for="name") Full Name:
+            .col-sm-8
+              input.form-control(name="name", placeholder="Full Name", value="{{user.profile.name}}")
+          .form-group
+            label.col-sm-4.control-label(for="pt.token") PivotalTracker API Token
+            .col-sm-8
+              input.form-control(name="pt.token", placeholder="PivotalTracker API Token", value="{{user.profile.pt.token}}")
+        hr

@@ -23,3 +23,14 @@ Template.login.events
     Meteor.loginWithPassword {email: email}, password, (error) ->
       if error
         console.log 'login failed'
+
+Template.index.events
+  'click .host': ->
+    id = PlanningSessions.insert
+      name: moment().format 'L'
+      owner: Meteor.userId()
+    , (error) ->
+      if error
+        console.log error.reason
+    if id
+      Router.go 'planningSessionEdit', {_id: id}

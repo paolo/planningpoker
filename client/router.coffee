@@ -20,3 +20,14 @@ Router.map () ->
     path: '/logout'
     controller: 'CoreController'
     action: 'logout'
+
+isLoggedIn = (pause) ->
+  if !(Meteor.loggingIn() || Meteor.userId())
+    @render 'login'
+    pause()
+
+Router.onBeforeAction isLoggedIn,
+  only: [
+    'planningSessionEdit'
+    'settings'
+  ]

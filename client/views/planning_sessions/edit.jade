@@ -1,0 +1,40 @@
+template(name="planningSessionEdit")
+  .container
+    .row
+      .col-xs-12
+        +with session
+          h1 Set up your planning session
+          .form-group
+            input.form-control(type="text", name="name", value="{{name}}", placeholder="Name")
+          .form-group
+            input.form-control(type="text", name="goal", value="{{goal}}", placeholder="The Session's main goal")
+        hr
+        ul.nav.nav-tabs
+          li.active
+            a(href="#tab-pt", data-toggle="tab") Pivotal Tracker
+          li
+            a(href="#tab-ct", data-toggle="tab") Custom
+        div.tab-content
+          div#tab-pt.tab-pane.fade.active.in
+            br
+            .form-group
+              label(for="projectName") Select a project:
+              select#pt-projects.form-control(name="projectName")
+                option(disabled="true") Select a project from PivotalTracker
+                +each projects
+                  option(value="{{id}}") #{name}
+            .form-group
+              label Select User Stories:
+              .list-group
+                +with stories
+                  +each this
+                      a.list-group-item(href="#")
+                        h4
+                          a(href="{{url}}") #{name}
+                else
+                  .list-group-item No User Stories to display
+
+          div#tab-ct.tab-pane.fade
+            span Custom content
+
+        button.btn.btn-primary(type="submit") Start Now!
