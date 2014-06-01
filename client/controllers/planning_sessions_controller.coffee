@@ -8,7 +8,9 @@ class @PlanningSessionsController extends RouteController
   waitOn: ->
     Meteor.subscribe 'planningSession', @params._id
   data: ->
-    PlanningSessions.findOne @params._id
+    session: PlanningSessions.findOne @params._id
+    projects: PTProjects.find().fetch()
+    stories: PTStories.find().fetch()
   edit: ->
     if !PlanningSessions.findOne @params._id
       Router.go '/404'
