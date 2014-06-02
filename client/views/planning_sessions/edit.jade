@@ -25,12 +25,18 @@ template(name="planningSessionEdit")
                   option(value="{{id}}") #{name}
             .form-group
               label Select User Stories:
-              .list-group
+              .list-group.stories-list
                 +with stories
                   +each this
                       a.list-group-item(href="#")
-                        h4
-                          a(href="{{url}}") #{name}
+                        a(href="{{url}}")
+                          i.glyphicon.glyphicon-map-marker
+                        span.badge
+                          +if estimate
+                            | #{estimate}
+                          else
+                            | ?
+                        |  #{name}
                 else
                   .list-group-item No User Stories to display
 

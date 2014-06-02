@@ -1,3 +1,8 @@
 body {
   padding-top: 50px;
 }
+
+.stories-list {
+  max-height: 280px;
+  overflow-y: scroll;
+}
