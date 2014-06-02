@@ -5,6 +5,7 @@ Template.planningSessionEdit.events
       $set: {}
     modifier.$set[name] = evt.target.value
     PlanningSessions.update this._id, modifier
+
   'change select#pt-projects': (evt) ->
     user = Meteor.user()
     projectId = evt.target.value
@@ -17,6 +18,13 @@ Template.planningSessionEdit.events
           stories = result.data
           _.each stories, (s) ->
             PTStories.insert s
+
+  'click a.list-group-item': (evt) ->
+    evt.preventDefault()
+    $(evt.currentTarget).toggleClass 'list-group-item-success'
+
+  'click a.list-group-item a': (evt) ->
+    evt.stopPropagation()
 
 Template.planningSessionEdit.rendered = ->
   user = Meteor.user()
