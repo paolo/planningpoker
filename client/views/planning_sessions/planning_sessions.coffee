@@ -26,6 +26,7 @@ Template.planningSessionEdit.rendered = ->
         'X-TrackerToken': user.profile.pt.token
     ,
       (error, result) ->
-        projects = result.data
-        _.each projects, (p) ->
-          PTProjects.insert p
+        if !error
+          projects = result.data
+          _.each projects, (p) ->
+            PTProjects.insert p
