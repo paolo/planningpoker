@@ -1,7 +1,7 @@
 template(name="planningSessionEdit")
   .container
     .row
-      .col-xs-12
+      .col-xs-12.col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
         +with session
           h1 Set up your planning session
           .form-group
@@ -23,23 +23,6 @@ template(name="planningSessionEdit")
                 option(disabled="true") Select a project from PivotalTracker
                 +each projects
                   option(value="{{id}}") #{name}
-            .form-group
-              label Select User Stories:
-              .list-group.stories-list
-                +with stories
-                  +each this
-                      a.list-group-item(href="#" id="{{_id}}" data-id="{{id}}")
-                        a(href="{{url}}" target="_blank")
-                          i.glyphicon.glyphicon-map-marker
-                        span.badge
-                          +if estimate
-                            | #{estimate}
-                          else
-                            | ?
-                        |  #{name}
-                else
-                  .list-group-item No User Stories to display
-
           div#tab-ct.tab-pane.fade
             span Custom content
 
