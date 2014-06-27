@@ -1,6 +1,16 @@
+# PlanningPoker
+# @author: Paolo Castro <paolocastro.deb@gmail.com>
+
+
+# Projects Collection
 @Projects = new Meteor.Collection 'projects'
 
+# Server methods
 Meteor.methods
+
+  # Load user projects.
+  #
+  # @param {String} planId PlanningSession's id.
   loadProjects: (planId) ->
     user = Meteor.users.findOne(@userId)
     if !PlanningSessions.findOne planId
