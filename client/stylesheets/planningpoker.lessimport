@@ -2,7 +2,15 @@ body {
   padding-top: 50px;
 }
 
-.stories-list {
-  max-height: 280px;
-  overflow-y: scroll;
+h1 {
+  margin-bottom: 20px;
+}
+
+.tab-pane {
+  padding: 10px;
+}
+
+button.pp-start {
+  display: block;
+  width: 100%;
 }

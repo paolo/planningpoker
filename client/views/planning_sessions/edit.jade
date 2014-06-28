@@ -5,9 +5,9 @@ template(name="planningSessionEdit")
         +with session
           h1 Set up your planning session
           .form-group
-            input.form-control(type="text", name="name", value="{{name}}", placeholder="Name")
+            input.input-lg.form-control(type="text", name="name", value="{{name}}", placeholder="Name")
           .form-group
-            input.form-control(type="text", name="goal", value="{{goal}}", placeholder="The Session's main goal")
+            input.input-lg.form-control(type="text", name="goal", value="{{goal}}", placeholder="The Session's main goal")
         hr
         ul.nav.nav-tabs
           li.active
@@ -16,14 +16,13 @@ template(name="planningSessionEdit")
             a(href="#tab-ct", data-toggle="tab") Custom
         div.tab-content
           div#tab-pt.tab-pane.fade.active.in
-            br
             .form-group
               label(for="projectName") Select a project:
-              select#pt-projects.form-control(name="projectName")
+              select#pt-projects.input-lg.form-control(name="projectName")
                 option(disabled="true") Select a project from PivotalTracker
                 +each projects
                   option(value="{{id}}") #{name}
           div#tab-ct.tab-pane.fade
             span Custom content
 
-        button.btn.btn-primary(type="submit") Start Now!
+        button.pp-start.btn.btn-primary.btn-lg(type="submit") Start Now!
