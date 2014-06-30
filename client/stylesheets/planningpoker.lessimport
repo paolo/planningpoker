@@ -2,6 +2,10 @@ body {
   padding-top: 50px;
 }
 
+.container {
+  width: 100%;
+}
+
 h1 {
   margin-bottom: 20px;
 }
@@ -13,4 +17,9 @@ h1 {
 button.pp-start {
   display: block;
   width: 100%;
+}
+
+.pp-live-banner {
+  padding: 10px;
+  font-size: 20px;
 }
