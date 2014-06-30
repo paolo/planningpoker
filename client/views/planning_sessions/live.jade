@@ -1,0 +1,9 @@
+template(name="planningSessionLive")
+  .container
+    .row
+      .col-xs-12.text-center
+        +with session
+          p.bg-success.pp-live-banner
+            strong.text-success #{name}
+            +if goal
+              i.text-muted (#{goal})
