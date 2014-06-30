@@ -6,7 +6,8 @@
       "iron-router-progress": {},
       "less-bootstrap-3": {},
       "moment": {},
-      "jade": {}
+      "jade": {},
+      "pnotify": {}
     },
     "packages": {
       "iron-router": {
@@ -16,8 +17,8 @@
       },
       "iron-router-progress": {
         "git": "https://github.com/Multiply/iron-router-progress.git",
-        "tag": "v0.3.1",
-        "commit": "3f7900feb4bb70a1289b39a1fdcd1f438c0335b3"
+        "tag": "v0.4.1",
+        "commit": "496fcda9a6ec352b4733725f60c6f280250c3541"
       },
       "less-bootstrap-3": {
         "git": "https://github.com/DerMambo/less-bootstrap-3.git",
@@ -31,8 +32,13 @@
       },
       "jade": {
         "git": "https://github.com/mquandalle/meteor-jade.git",
-        "tag": "v0.2.2",
-        "commit": "0391abab7d592b17ff74d9b9beaa721051970729"
+        "tag": "v0.2.4",
+        "commit": "a47a4c59daaa57e7fe5f1544d4ea76d95a5c9abf"
+      },
+      "pnotify": {
+        "git": "https://github.com/kidovate/meteor-pnotify.git",
+        "tag": "v2.0.6",
+        "commit": "cbd0bb220d03b20b247e4a6a7bdfc3d2c8064216"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
