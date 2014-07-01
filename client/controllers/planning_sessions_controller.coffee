@@ -18,9 +18,13 @@ Router.map () ->
     waitOn: ->
       [
         Meteor.subscribe 'planningSession', @params._id
+        Meteor.subscribe 'planProject', @params._id
+        Meteor.subscribe 'planStories', @params._id
       ]
     data: ->
       session: PlanningSessions.findOne @params._id
+      project: Projects.findOne()
+      stories: Stories.find()
 
 class @PlanningSessionsController extends RouteController
   # Edit Planning session
