@@ -22,6 +22,7 @@ Template.planningSessionEdit.events
           started: true
           closed: false
           projectId: projectId
+      Meteor.call "loadStories", @session._id
       Notifier.success 'Planning Session started', 'Your planning session has successfully started and is live now!'
       Router.go 'planningSessionLive',
         _id: @session._id
