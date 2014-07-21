@@ -26,3 +26,17 @@ Template.planningSessionEdit.events
       Notifier.success 'Planning Session started', 'Your planning session has successfully started and is live now!'
       Router.go 'planningSessionLive',
         _id: @session._id
+
+Template.planningSessionLive.events
+  'click a.list-group-item': () ->
+    planId = Session.get '__planId'
+    plan = PlanningSessions.findOne planId
+    if plan && plan.owner == Meteor.userId()
+      PlanningSessions.update planId,
+        $set:
+          selectedStory: @_id
+
+Template.planningSessionLive.helpers
+  'selectedStory': () ->
+    storyId = @session.selectedStory
+    Stories.findOne storyId
