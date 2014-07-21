@@ -25,7 +25,13 @@ template(name="planningSessionLive")
       .col-xs-12.col-sm-8.col-md-6
         .panel.panel-default
           .panel-heading Current User Story
-          .panel-body Selected User Story here
+          .panel-body
+            +if session.selectedStory
+              +with selectedStory
+                h2 #{name}
+                p #{description}
+            else
+              h2 No user story selected yet
       .hidden-xs.hidden-sm.col-md-3
         .panel.panel-default
           .panel-heading Status
