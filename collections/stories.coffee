@@ -53,10 +53,7 @@ if Meteor.isServer
   # Planning session user stories
   # @param {String} planning session id.
   Meteor.publish "planStories", (planId) ->
-    user = Meteor.users.findOne @userId
-    plan = PlanningSessions.findOne
-      _id: planId
-      owner: user._id
+    plan = PlanningSessions.findOne planId
     if plan && plan.projectId
       project = Projects.findOne plan.projectId
       if project
