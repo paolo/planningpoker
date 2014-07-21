@@ -39,6 +39,7 @@ class @PlanningSessionsController extends RouteController
   live: ->
     plan = PlanningSessions.findOne @params._id
     if plan && plan.started && !plan.closed
+      Session.set '__planId', plan._id
       @render 'planningSessionLive'
     else
       Router.go '/404'
