@@ -19,20 +19,21 @@ Meteor.methods
     if user.profile.pt && user.profile.pt.token
       headers = {}
       headers[PT.TOK_HEADER] = user.profile.pt.token
-      HTTP.get PT.API_URL + 'projects', {headers: headers}, (err, result) ->
-        if !err
-          projects = result.data
-          _.each projects, (p) ->
-            Projects.upsert
-              provider: PT.PROVIDER
-              externalId: p.id
-            ,
-              $set:
-                name: p.name
+      if !@isSimulation
+        HTTP.get PT.API_URL + 'projects', {headers: headers}, (err, result) ->
+          if !err
+            projects = result.data
+            _.each projects, (p) ->
+              Projects.upsert
                 provider: PT.PROVIDER
                 externalId: p.id
-              $addToSet:
-                planIds: planId
+              ,
+                $set:
+                  name: p.name
+                  provider: PT.PROVIDER
+                  externalId: p.id
+                $addToSet:
+                  planIds: planId
 
 # Projects publications.
 if Meteor.isServer
@@ -42,3 +43,10 @@ if Meteor.isServer
     Projects.find
       planIds:
         $in: [planId]
+
+  # Publish the selected project for the planning session
+  Meteor.publish 'planProject', (planId) ->
+    plan = PlanningSessions.findOne planId
+    if plan
+      Projects.find
+        _id: plan.projectId

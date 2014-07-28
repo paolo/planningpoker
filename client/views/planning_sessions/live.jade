@@ -1,0 +1,38 @@
+template(name="planningSessionLive")
+  .container
+    .row
+      .col-xs-12.text-center
+        +with session
+          p.bg-info.pp-live-banner
+            strong.text-primary #{name}
+            +if goal
+              i.text-muted (#{goal})
+    .row
+      .hidden-xs.col-sm-4.col-md-3
+        .panel.panel-default
+          .panel-heading User Stories
+          .panel-body
+            .list-group
+              +each stories
+                a.list-group-item(href="#")
+                  +if estimateable
+                    +if estimate
+                      span.badge #{estimate}
+                    else
+                      span.badge ?
+                  i #{storyType}
+                  strong #{name}
+      .col-xs-12.col-sm-8.col-md-6
+        .panel.panel-default
+          .panel-heading Current User Story
+          .panel-body
+            +if session.selectedStory
+              +with selectedStory
+                h2 #{name}
+                p #{description}
+            else
+              h2 No user story selected yet
+      .hidden-xs.hidden-sm.col-md-3
+        .panel.panel-default
+          .panel-heading Status
+          .panel-body Status updates

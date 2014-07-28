@@ -21,8 +21,8 @@ template(name="planningSessionEdit")
               select#pt-projects.input-lg.form-control(name="projectName")
                 option(disabled="true") Select a project from PivotalTracker
                 +each projects
-                  option(value="{{id}}") #{name}
+                  option(value="{{_id}}") #{name}
           div#tab-ct.tab-pane.fade
             span Custom content
 
-        button.pp-start.btn.btn-primary.btn-lg(type="submit") Start Now!
+        button.pp-start.btn.btn-primary.btn-lg Start Now!
