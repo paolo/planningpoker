@@ -29,5 +29,6 @@ isLoggedIn = (pause) ->
 Router.onBeforeAction isLoggedIn,
   only: [
     'planningSessionEdit'
+    'planningSessionLive'
     'settings'
   ]
