@@ -1,0 +1,8 @@
+template(name="story")
+  +if estimateable
+    +if estimate
+      span.badge #{estimate}
+    else
+      span.badge ?
+  i #{storyType}
+  strong #{name}

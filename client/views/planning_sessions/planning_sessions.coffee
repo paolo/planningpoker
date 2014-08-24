@@ -37,6 +37,24 @@ Template.planningSessionLive.events
           selectedStory: @_id
 
 Template.planningSessionLive.helpers
-  'selectedStory': () ->
+  'selectedStory': ->
     storyId = @session.selectedStory
     Stories.findOne storyId
+  'sessionOwner': ->
+    planId = Session.get '__planId'
+    plan = PlanningSessions.findOne planId
+    plan && plan.owner == Meteor.userId()
+  'storiesClass': ->
+    planId = Session.get '__planId'
+    plan = PlanningSessions.findOne planId
+    if plan && plan.owner == Meteor.userId()
+      "panel-info"
+    else
+      "panel-default"
+  'activeStoryClass': ->
+    planId = Session.get '__planId'
+    plan = PlanningSessions.findOne planId
+    if plan && plan.selectedStory == @_id
+      "list-group-item-info"
+    else
+      ""
