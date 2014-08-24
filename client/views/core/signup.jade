@@ -10,3 +10,5 @@ template(name="signUp")
         .form-group
           input.form-control(type="password", placeholder="Password")
         button.btn.btn-success Create Account
+        p Already have an account? login
+          a(href="{{pathFor 'login'}}") here

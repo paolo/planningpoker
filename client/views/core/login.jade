@@ -4,7 +4,9 @@ template(name="login")
       form.text-center
         h2 Log In
         .form-group
-          input.form-control(type="email", placeholder="Email")
+          input.form-control(name="username" type="text" placeholder="Username or Email")
         .form-group
-          input.form-control(type="password", placeholder="Password")
+          input.form-control(type="password" placeholder="Password")
         button.btn.btn-success Log in
+        p Don't have an account? create one
+          a(href="{{pathFor 'signUp'}}") here
