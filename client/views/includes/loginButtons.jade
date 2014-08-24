@@ -1,5 +1,5 @@
 template(name="loginButtons")
-  with loggedUser
+  with currentUser
     li.dropdown
       a.dropdown-toggle(data-toggle="dropdown") #{displayName}
         b.caret
@@ -9,5 +9,5 @@ template(name="loginButtons")
         li
           a(href="{{pathFor 'logout'}}") Logout
   else
-    li.navbar-form
-      button.btn.btn-primary(type="submit") Login
+    li
+      a(href="{{pathFor 'login'}}") Login
