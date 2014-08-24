@@ -1,28 +1,49 @@
 Template.signUp.events
   'submit': (event) ->
     event.preventDefault()
-    username = $(event.target).find("[type=text]").val()
-    email = $(event.target).find("[type=email]").val()
-    password = $(event.target).find("[type=password]").val()
+    username = $(event.target).find("[type=text]")
+    email = $(event.target).find("[type=email]")
+    password = $(event.target).find("[type=password]")
     Accounts.createUser
-      username: username
-      email: email
-      password: password
+      username: username.val()
+      email: email.val()
+      password: password.val()
     ,
       (error) ->
         if error
-          console.log error
+          username.parent().addClass("has-error")
+          email.parent().addClass("has-error")
+          password.parent().addClass("has-error")
+          new PNotify
+            text: "Sign up failed"
+            type: "error"
+          username.focus()
         else
+          new PNotify
+            text: "Welcome!"
+            type: "success"
           Router.go 'index'
 
 Template.login.events
   'submit': (event) ->
     event.preventDefault()
-    email = $(event.target).find("[type=email]").val()
-    password = $(event.target).find("[type=password]").val()
-    Meteor.loginWithPassword {email: email}, password, (error) ->
+    username = $(event.target).find("[name=username]")
+    password = $(event.target).find("[type=password]")
+    Meteor.loginWithPassword username.val(), password.val(), (error) ->
       if error
-        console.log 'login failed'
+        username.parent().addClass("has-error")
+        password.parent().addClass("has-error")
+        username.focus()
+        new PNotify
+          title: "Login Failed"
+          text: "Incorrect username or password"
+          type: "error"
+      else
+        new PNotify
+          title: "Welcome back!"
+          type: "success"
+      username.val ""
+      password.val ""
 
 Template.index.events
   'click .host': ->
