@@ -5,6 +5,7 @@ template(name="planningSessionEdit")
         +with session
           h1 Set up your planning session
           .form-group
+            label(for="name") Planning session name:
             input.input-lg.form-control(type="text", name="name", value="{{name}}", placeholder="Name")
           .form-group
             input.input-lg.form-control(type="text", name="goal", value="{{goal}}", placeholder="The Session's main goal")
