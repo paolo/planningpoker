@@ -9,19 +9,20 @@ template(name="planningSessionLive")
               i.text-muted (#{goal})
     .row
       .hidden-xs.col-sm-4.col-md-3
-        .panel.panel-default
+        .panel(class="{{storiesClass}}")
           .panel-heading User Stories
+            +if sessionOwner
+              span (Driving)
           .panel-body
             .list-group
               +each stories
-                a.list-group-item(href="#")
-                  +if estimateable
-                    +if estimate
-                      span.badge #{estimate}
-                    else
-                      span.badge ?
-                  i #{storyType}
-                  strong #{name}
+                +if sessionOwner
+                  a.list-group-item(href="#" class="{{activeStoryClass}}")
+                    +story
+                else
+                  .list-group-item(class="{{activeStoryClass}}")
+                    +story
+
       .col-xs-12.col-sm-8.col-md-6
         .panel.panel-default
           .panel-heading Current User Story

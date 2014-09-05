@@ -14,14 +14,10 @@ Template.signUp.events
           username.parent().addClass("has-error")
           email.parent().addClass("has-error")
           password.parent().addClass("has-error")
-          new PNotify
-            text: "Sign up failed"
-            type: "error"
+          Notifier.error "Sign up failed", "Verify your username, email and/or password"
           username.focus()
         else
-          new PNotify
-            text: "Welcome!"
-            type: "success"
+          Notifier.success "Success!", "Welcome!"
           Router.go 'index'
 
 Template.login.events
@@ -34,14 +30,9 @@ Template.login.events
         username.parent().addClass("has-error")
         password.parent().addClass("has-error")
         username.focus()
-        new PNotify
-          title: "Login Failed"
-          text: "Incorrect username or password"
-          type: "error"
+        Notifier.error "Login failed", "Invalid login information"
       else
-        new PNotify
-          title: "Welcome back!"
-          type: "success"
+        Notifier.success "Success!", "Welcome back!"
       username.val ""
       password.val ""
 
