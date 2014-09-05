@@ -40,9 +40,12 @@ if Meteor.isServer
         $set:
           owner: userId
 
-  # Publish a Planning session by id.
+  # Publish a Planning session by id algon with the users connected to it
   Meteor.publish 'planningSession', (id) ->
-    PlanningSessions.find _id: id
+    [
+      PlanningSessions.find(_id: id)
+      Meteor.users.find('profile.currentPlan': id, 'status.online': true)
+    ]
 
 if Meteor.isClient
   Tracker.autorun ->
