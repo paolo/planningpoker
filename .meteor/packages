@@ -8,10 +8,11 @@ coffeescript
 less
 accounts-base
 accounts-password
-iron-router
-iron-router-progress
-less-bootstrap-3
-moment
-jade
 http
-pnotify
+iron:router
+mrt:iron-router-progress
+mrt:moment
+kidovate:pnotify
+waitingkuo:jade
+nemo64:bootstrap
+
