@@ -50,3 +50,7 @@ if Meteor.isClient
       Session.set('__planId', PlanningSessions.findOne()._id)
     else
       Session.set('__planId', '')
+    if Meteor.userId()
+      Meteor.users.update Meteor.userId(),
+        $set:
+          'profile.currentPlan': Session.get('__planId')
