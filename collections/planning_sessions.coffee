@@ -43,3 +43,10 @@ if Meteor.isServer
   # Publish a Planning session by id.
   Meteor.publish 'planningSession', (id) ->
     PlanningSessions.find _id: id
+
+if Meteor.isClient
+  Tracker.autorun ->
+    if PlanningSessions.find().count() == 1
+      Session.set('__planId', PlanningSessions.findOne()._id)
+    else
+      Session.set('__planId', '')
