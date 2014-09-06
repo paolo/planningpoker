@@ -25,6 +25,7 @@ Router.map () ->
       session: PlanningSessions.findOne @params._id
       project: Projects.findOne()
       stories: Stories.find()
+      users: Meteor.users.find()
 
 class @PlanningSessionsController extends RouteController
   # Edit Planning session
