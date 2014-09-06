@@ -61,7 +61,9 @@ Template.planningSessionLive.helpers
 
 Template.memberItem.helpers
   onlineStatus: ->
-    if @status.idle
+    if @member.status.idle
       "member-idle"
     else
       "member-online"
+  isMe: ->
+    @member._id == Meteor.userId()

@@ -2,4 +2,10 @@ template(name="memberItem")
   .list-group-item
     span
       i.glyphicon.glyphicon-user(class="{{onlineStatus}}")
-      | #{displayName}
+      | #{member.displayName}
+      +if isMe
+        span.pull-right me
+      else
+        +if sessionOwner
+          span.pull-right
+            a(href="#") make organizer
