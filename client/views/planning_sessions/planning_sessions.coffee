@@ -58,3 +58,19 @@ Template.planningSessionLive.helpers
       "list-group-item-info"
     else
       ""
+
+Template.memberItem.helpers
+  onlineStatus: ->
+    if @member.status.idle
+      "member-idle"
+    else
+      "member-online"
+  isMe: ->
+    @member._id == Meteor.userId()
+
+Template.memberItem.events
+  'click a.make-organizer': (evt) ->
+    evt.preventDefault();
+    Meteor.call "giveOwnership", Session.get('__planId'), $(evt.target).data('userId'), (err) ->
+      unless err
+        Notifier.info "Ownership delivered", "You're no longer the organizer of this session"
