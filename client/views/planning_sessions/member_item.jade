@@ -8,4 +8,4 @@ template(name="memberItem")
       else
         +if sessionOwner
           span.pull-right
-            a(href="#") make organizer
+            a.make-organizer(href="#" data-user-id="{{member._id}}") make organizer
