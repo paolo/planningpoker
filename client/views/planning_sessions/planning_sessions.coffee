@@ -58,3 +58,10 @@ Template.planningSessionLive.helpers
       "list-group-item-info"
     else
       ""
+
+Template.memberItem.helpers
+  onlineStatus: ->
+    if @status.idle
+      "member-idle"
+    else
+      "member-online"

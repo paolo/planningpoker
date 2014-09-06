@@ -36,4 +36,7 @@ template(name="planningSessionLive")
       .hidden-xs.hidden-sm.col-md-3
         .panel.panel-default
           .panel-heading Status
-          .panel-body Status updates
+          .panel-body
+            .list-group
+              +each users
+                +memberItem
