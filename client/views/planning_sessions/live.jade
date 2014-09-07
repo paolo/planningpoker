@@ -1,6 +1,6 @@
 template(name="planningSessionLive")
-  div.navbar.navbar-default.navbar-fixed-top.bottom-nav
-    div.container
+  div.navbar.navbar-default.navbar-static-top.bottom-nav
+    div.container-fluid
       div.navbar-header
         button.navbar-toggle(type="button" data-toggle="collapse" data-target="#plan-nav")
           span.sr-only Toggle navigation
@@ -18,7 +18,7 @@ template(name="planningSessionLive")
             li.visible-xs.visible-sm(class="{{activeView 'users'}}" data-toggle="collapse" data-target="#plan-nav")
               a(href="{{pathFor 'planningSessionLive'}}?view=users") Online Users
   +if currentView "board"
-    .container
+    .container-fluid
       .row
         .hidden-xs.col-sm-4.col-md-3
           .list-group
@@ -47,7 +47,7 @@ template(name="planningSessionLive")
             +each users
               +memberItem member=this sessionOwner=sessionOwner
   +if currentView "stories"
-    .container
+    .container-fluid
       .row
         .col-xs-12
           .list-group
@@ -60,7 +60,7 @@ template(name="planningSessionLive")
                 .list-group-item(class="{{activeStoryClass}}")
                   +story
   +if currentView "users"
-    .container
+    .container-fluid
       .row
         .col-xs-12
           .list-group
