@@ -1,11 +1,13 @@
 template(name="memberItem")
   .list-group-item
-    span
-      i.glyphicon.glyphicon-user(class="{{onlineStatus}}")
-      | #{member.displayName}
-      +if isMe
-        span.pull-right me
-      else
-        +if sessionOwner
-          span.pull-right
-            a.make-organizer(href="#" data-user-id="{{member._id}}") make organizer
+    .row
+      .col-xs-9
+        i.glyphicon.glyphicon-user(class="{{onlineStatus}}")
+        | #{member.displayName}
+      .col-xs-3.text-right
+        +if isMe
+          | me
+        else
+          +if sessionOwner
+            a.make-organizer(href="#" data-user-id="{{member._id}}" title="Make Organizer")
+              i.glyphicon.glyphicon-circle-arrow-up

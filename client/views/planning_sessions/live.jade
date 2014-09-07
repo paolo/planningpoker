@@ -1,12 +1,18 @@
 template(name="planningSessionLive")
+  div.navbar.navbar-default.navbar-fixed-top.bottom-nav
+    div.container
+      div.navbar-header
+        button.navbar-toggle(type="button" data-toggle="collapse" data-target="#plan-nav")
+          span.sr-only Toggle navigation
+          i.glyphicon.glyphicon-user
+        a.navbar-brand(href="#") #{session.name}
+         +if session.goal
+           i.text-muted : #{session.goal}
+      #plan-nav.navbar-collapse.collapse
+        ul.nav.navbar-nav.navbar-right
+          li.visible-xs.visible-sm
+            a(href="#") Online Users
   .container
-    .row
-      .col-xs-12.text-center
-        +with session
-          p.bg-info.pp-live-banner
-            strong.text-primary #{name}
-            +if goal
-              i.text-muted (#{goal})
     .row
       .hidden-xs.col-sm-4.col-md-3
         .panel(class="{{storiesClass}}")
