@@ -9,13 +9,14 @@ template(name="planningSessionLive")
          +if session.goal
            i.text-muted : #{session.goal}
       #plan-nav.navbar-collapse.collapse
-        ul.nav.navbar-nav.navbar-right
-          li.visible-xs.visible-sm
-            a(href="#") Planning Board
-          li.visible-xs
-            a(href="#") User Stories
-          li.visible-xs.visible-sm
-            a(href="#") Online Users
+        +with session
+          ul.nav.navbar-nav.navbar-right
+            li.visible-xs.visible-sm(class="{{activeView 'board'}}")
+              a(href="{{pathFor 'planningSessionLive'}}") Planning Board
+            li.visible-xs(class="{{activeView 'stories'}}")
+              a(href="{{pathFor 'planningSessionLive'}}?view=stories") User Stories
+            li.visible-xs.visible-sm(class="{{activeView 'users'}}")
+              a(href="{{pathFor 'planningSessionLive'}}?view=users") Online Users
   +if currentView "board"
     .container
       .row

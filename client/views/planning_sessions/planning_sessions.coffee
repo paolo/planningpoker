@@ -60,10 +60,13 @@ Template.planningSessionLive.helpers
       ""
   'currentView': (view) ->
     Session.get('planningSessionLiveView') == view
+  'activeView': (view) ->
+    if Session.get('planningSessionLiveView') == view
+      return 'active'
 
 Template.memberItem.helpers
   onlineStatus: ->
-    if @member.status.idle
+    if @member.status && @member.status.idle
       "member-idle"
     else
       "member-online"
