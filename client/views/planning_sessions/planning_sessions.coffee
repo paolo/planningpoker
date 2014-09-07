@@ -58,6 +58,8 @@ Template.planningSessionLive.helpers
       "list-group-item-info"
     else
       ""
+  'currentView': (view) ->
+    Session.get('planningSessionLiveView') == view
 
 Template.memberItem.helpers
   onlineStatus: ->

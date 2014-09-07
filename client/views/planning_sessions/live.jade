@@ -16,37 +16,57 @@ template(name="planningSessionLive")
             a(href="#") User Stories
           li.visible-xs.visible-sm
             a(href="#") Online Users
-  .container
-    .row
-      .hidden-xs.col-sm-4.col-md-3
-        .panel(class="{{storiesClass}}")
-          .panel-heading User Stories
-            +if sessionOwner
-              span (Driving)
-          .panel-body
-            .list-group
-              +each stories
-                +if sessionOwner
-                  a.list-group-item(href="#" class="{{activeStoryClass}}")
-                    +story
-                else
-                  .list-group-item(class="{{activeStoryClass}}")
-                    +story
+  +if currentView "board"
+    .container
+      .row
+        .hidden-xs.col-sm-4.col-md-3
+          .panel(class="{{storiesClass}}")
+            .panel-heading User Stories
+              +if sessionOwner
+                span (Driving)
+            .panel-body
+              .list-group
+                +each stories
+                  +if sessionOwner
+                    a.list-group-item(href="#" class="{{activeStoryClass}}")
+                      +story
+                  else
+                    .list-group-item(class="{{activeStoryClass}}")
+                      +story
 
-      .col-xs-12.col-sm-8.col-md-6
-        .panel.panel-default
-          .panel-heading Current User Story
-          .panel-body
-            +if session.selectedStory
-              +with selectedStory
-                h2 #{name}
-                p #{description}
-            else
-              h2 No user story selected yet
-      .hidden-xs.hidden-sm.col-md-3
-        .panel.panel-default
-          .panel-heading Status
-          .panel-body
-            .list-group
-              +each users
-                +memberItem member=this sessionOwner=sessionOwner
+        .col-xs-12.col-sm-8.col-md-6
+          .panel.panel-default
+            .panel-heading Current User Story
+            .panel-body
+              +if session.selectedStory
+                +with selectedStory
+                  h2 #{name}
+                  p #{description}
+              else
+                h2 No user story selected yet
+        .hidden-xs.hidden-sm.col-md-3
+          .panel.panel-default
+            .panel-heading Status
+            .panel-body
+              .list-group
+                +each users
+                  +memberItem member=this sessionOwner=sessionOwner
+  +if currentView "stories"
+    .container
+      .row
+        .col-xs-12
+          .list-group
+            +each stories
+              +if sessionOwner
+                a.list-group-item(href="#" class="{{activeStoryClass}}")
+                  +story
+              else
+                .list-group-item(class="{{activeStoryClass}}")
+                  +story
+  +if currentView "users"
+    .container
+      .row
+        .col-xs-12.col-sm-8.col-sm-offset-2
+          .list-group
+            +each users
+              +memberItem member=this sessionOwner=sessionOwner
