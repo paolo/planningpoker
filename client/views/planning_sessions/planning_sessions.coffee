@@ -35,6 +35,10 @@ Template.planningSessionLive.events
       PlanningSessions.update planId,
         $set:
           selectedStory: @_id
+      , (error) ->
+        if !error && Session.get('planningSessionLiveView') == 'stories'
+          Router.go 'planningSessionLive',
+            _id: planId
 
 Template.planningSessionLive.helpers
   'selectedStory': ->
