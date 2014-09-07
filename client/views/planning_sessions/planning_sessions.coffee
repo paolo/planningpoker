@@ -28,7 +28,7 @@ Template.planningSessionEdit.events
         _id: @session._id
 
 Template.planningSessionLive.events
-  'click a.list-group-item': () ->
+  'click a.story-item': () ->
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
     if plan && plan.owner == Meteor.userId()

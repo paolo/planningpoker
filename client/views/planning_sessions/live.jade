@@ -28,7 +28,7 @@ template(name="planningSessionLive")
               .list-group
                 +each stories
                   +if sessionOwner
-                    a.list-group-item(href="#" class="{{activeStoryClass}}")
+                    a.list-group-item.story-item(href="#" class="{{activeStoryClass}}")
                       +story
                   else
                     .list-group-item(class="{{activeStoryClass}}")
@@ -58,7 +58,7 @@ template(name="planningSessionLive")
           .list-group
             +each stories
               +if sessionOwner
-                a.list-group-item(href="#" class="{{activeStoryClass}}")
+                a.list-group-item.story-item(href="#" class="{{activeStoryClass}}")
                   +story
               else
                 .list-group-item(class="{{activeStoryClass}}")
