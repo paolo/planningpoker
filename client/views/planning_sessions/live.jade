@@ -4,18 +4,18 @@ template(name="planningSessionLive")
       div.navbar-header
         button.navbar-toggle(type="button" data-toggle="collapse" data-target="#plan-nav")
           span.sr-only Toggle navigation
-          i.glyphicon.glyphicon-user
+          i.glyphicon.glyphicon-chevron-down
         a.navbar-brand(href="#") #{session.name}
          +if session.goal
            i.text-muted : #{session.goal}
       #plan-nav.navbar-collapse.collapse
         +with session
           ul.nav.navbar-nav.navbar-right
-            li.visible-xs.visible-sm(class="{{activeView 'board'}}")
+            li.visible-xs.visible-sm(class="{{activeView 'board'}}" data-toggle="collapse" data-target="#plan-nav")
               a(href="{{pathFor 'planningSessionLive'}}") Planning Board
-            li.visible-xs(class="{{activeView 'stories'}}")
+            li.visible-xs(class="{{activeView 'stories'}}" data-toggle="collapse" data-target="#plan-nav")
               a(href="{{pathFor 'planningSessionLive'}}?view=stories") User Stories
-            li.visible-xs.visible-sm(class="{{activeView 'users'}}")
+            li.visible-xs.visible-sm(class="{{activeView 'users'}}" data-toggle="collapse" data-target="#plan-nav")
               a(href="{{pathFor 'planningSessionLive'}}?view=users") Online Users
   +if currentView "board"
     .container
