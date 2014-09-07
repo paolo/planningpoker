@@ -59,7 +59,7 @@ Template.planningSessionLive.helpers
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
     if plan && plan.selectedStory == @_id
-      "list-group-item-info"
+      "active"
     else
       ""
   'currentView': (view) ->

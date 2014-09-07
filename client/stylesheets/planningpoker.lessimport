@@ -35,3 +35,8 @@ button.pp-start {
 .member-idle {
   color: #efb55a;
 }
+
+.list-group-item-header {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
