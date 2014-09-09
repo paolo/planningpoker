@@ -1,5 +1,5 @@
 template(name="story")
   +if estimateable
     span.badge #{estimate}
-  i #{storyType}
+  i.glyphicon.story-icon(class="{{storyType}}")
   strong #{name}

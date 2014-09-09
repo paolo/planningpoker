@@ -70,3 +70,28 @@ button.pp-start {
   background-color: #f5f5f5;
   font-weight: bold;
 }
+
+.story-icon {
+  margin: 4px;
+  font-weight: bold;
+}
+
+.feature {
+  color: gold;
+  &:before { content: "\e006"; }
+}
+
+.chore {
+  color: darkgray;
+  &:before { content: "\e019"; }
+}
+
+.release {
+  color: blue;
+  &:before { content: "\e034"; }
+}
+
+.bug {
+  color: darkred;
+  &:before { content: "\e104"; }
+}
