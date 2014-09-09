@@ -57,11 +57,11 @@ button.pp-start {
   position: absolute;
   top: 0;
   right: 0;
-  width: 80px;
-  height: 80px;
+  width: 75px;
+  height: 75px;
   background-color: @btn-primary-bg;
   color: @btn-primary-color;
-  font-size: 60px;
+  font-size: 50px;
   text-align: center;
   border-bottom-left-radius: @border-radius-large;
 }
