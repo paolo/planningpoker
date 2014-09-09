@@ -1,13 +1,18 @@
-body {
-  padding-top: 110px;
+html, body {
+  height: 100%;
+}
+
+.navbar {
+  margin-bottom: 0px;
 }
 
 .bottom-nav {
-  margin-top: 50px;
+  margin-bottom: 10px;
+  z-index: 999;
 }
 
 .container {
-  width: 100%;
+  /* width: 99%; */
 }
 
 h1 {
@@ -34,4 +39,9 @@ button.pp-start {
 
 .member-idle {
   color: #efb55a;
+}
+
+.list-group-item-header {
+  background-color: #f5f5f5;
+  font-weight: bold;
 }

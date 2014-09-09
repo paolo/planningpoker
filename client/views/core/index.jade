@@ -1,6 +1,6 @@
 template(name="index")
   .jumbotron
-    .container.text-center
+    .container-fluid.text-center
       h1 Planning Poker!
       with loggedUser
         p Host a new planning sessiong or join an existing one with your access code
@@ -16,7 +16,7 @@ template(name="index")
             a.btn.btn-primary(href="{{pathFor 'signUp'}}") Sing Up
           .col-xs-6.text-left
             a.btn.btn-primary(href="{{pathFor 'login'}}") Log In
-  .container
+  .container-fluid
     .row
       .col-sm-4
         h2 Pick the topic to discuss
