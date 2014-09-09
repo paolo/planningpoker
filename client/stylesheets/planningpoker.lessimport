@@ -41,6 +41,31 @@ button.pp-start {
   color: #efb55a;
 }
 
+.story-view {
+  border-top-right-radius: 0;
+
+  .panel-body {
+    position: relative;
+  }
+
+  h2 {
+    padding-right: 80px;
+  }
+}
+
+.estimate-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  background-color: @btn-primary-bg;
+  color: @btn-primary-color;
+  font-size: 60px;
+  text-align: center;
+  border-bottom-left-radius: @border-radius-large;
+}
+
 .list-group-item-header {
   background-color: #f5f5f5;
   font-weight: bold;

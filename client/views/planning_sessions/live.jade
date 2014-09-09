@@ -32,11 +32,12 @@ template(name="planningSessionLive")
                   +story
 
         .col-xs-12.col-sm-8.col-md-6
-          .panel.panel-default
-            .panel-heading Current User Story
+          .panel.panel-default.story-view
             .panel-body
               +if session.selectedStory
                 +with selectedStory
+                  +if estimateable
+                    .estimate-box #{estimate}
                   h2 #{name}
                   p #{description}
               else

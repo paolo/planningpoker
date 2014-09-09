@@ -1,8 +1,5 @@
 template(name="story")
   +if estimateable
-    +if estimate
-      span.badge #{estimate}
-    else
-      span.badge ?
+    span.badge #{estimate}
   i #{storyType}
   strong #{name}
