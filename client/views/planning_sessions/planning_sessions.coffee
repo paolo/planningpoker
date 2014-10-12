@@ -39,6 +39,12 @@ Template.planningSessionLive.events
         if !error && Session.get('planningSessionLiveView') == 'stories'
           Router.go 'planningSessionLive',
             _id: planId
+  'click .pp-start': (evt) ->
+    evt.preventDefault()
+    storyId = $(evt.target).data('storyId')
+    plan = PlanningSessions.findOne(Session.get('__planId'))
+    if plan && plan.owner == Meteor.userId()
+      Meteor.call "openVoting", plan._id, storyId
 
 Template.planningSessionLive.helpers
   'selectedStory': ->
@@ -48,6 +54,10 @@ Template.planningSessionLive.helpers
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
     plan && plan.owner == Meteor.userId()
+  'votingOpen': ->
+    planId = Session.get '__planId'
+    plan = PlanningSessions.findOne planId
+    plan.votingOn == @_id
   'storiesClass': ->
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
