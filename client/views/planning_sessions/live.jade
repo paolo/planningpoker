@@ -55,7 +55,7 @@ template(name="planningSessionLive")
                         span.input-group-btn
                           button.btn.btn-primary(type="submit") Vote!
                     +each storyVotes
-                      span.btn(class="{{btnClass}}") {{userName}}
+                      span.voters.btn(class="{{btnClass}}") {{userName}}
                   else
                     +if sessionOwner
                       p
