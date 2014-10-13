@@ -39,7 +39,7 @@ Template.planningSessionLive.events
         if !error && Session.get('planningSessionLiveView') == 'stories'
           Router.go 'planningSessionLive',
             _id: planId
-  'click .pp-start': (evt) ->
+  'click .pp-start-voting': (evt) ->
     evt.preventDefault()
     storyId = $(evt.target).data('storyId')
     plan = PlanningSessions.findOne(Session.get('__planId'))
