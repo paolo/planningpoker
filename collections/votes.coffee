@@ -12,6 +12,22 @@ if Meteor.isServer
     Votes.find planId: planId, storyId: storyId, closed: false,
       fields: planId: 1, storyId: 1, owner: 1, status: 1
 
+  Meteor.methods
+    castVote: (planId, storyId, value) ->
+      if !@userId
+        throw new Meteor.Error 401, 'Unable to access'
+      vote = Votes.findOne planId: planId, storyId: storyId, owner: @userId, closed: false
+      if vote
+        Votes.update vote._id, $set: value: value, status: 'casted'
+      else
+        Votes.insert
+          planId: planId
+          storyId: storyId
+          owner: @userId
+          value: value
+          status: 'casted'
+          closed: false
+
 if Meteor.isClient
   Tracker.autorun ->
     console.log 'autorun'
