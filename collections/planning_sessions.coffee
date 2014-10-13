@@ -40,7 +40,7 @@ if Meteor.isServer
         $set:
           owner: userId
 
-    openVoting: (planId, storyId) ->
+    openVoting: (planId, storyId, currentUsers) ->
       if !@userId
         throw new Meteor.Error 403, 'Unable to access'
       plan = PlanningSessions.findOne planId
@@ -49,6 +49,14 @@ if Meteor.isServer
       if plan.owner != @userId
         throw new Meteor.Error 401, 'Unauthorized operation'
       PlanningSessions.update planId, $set: votingOn: storyId
+      @unblock()
+      _.each currentUsers, (userId) ->
+        Votes.insert
+          planId: planId
+          storyId: storyId
+          owner: userId
+          status: 'open'
+          closed: false
 
     closeVoting: (planId) ->
       if !@userId

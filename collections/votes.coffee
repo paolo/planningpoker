@@ -10,4 +10,4 @@ if Meteor.isServer
   # Publish votes without the actual vote value.
   Meteor.publish 'votes', (planId, storyId) ->
     Votes.find planId: planId, storyId: storyId, closed: false,
-      fields: planId: 1, storyId: 1, userId: 1, status: 1
+      fields: planId: 1, storyId: 1, owner: 1, status: 1
