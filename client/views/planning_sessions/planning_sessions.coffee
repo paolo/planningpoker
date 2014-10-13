@@ -48,36 +48,41 @@ Template.planningSessionLive.events
         unless error then Meteor.subscribe 'votes', plan._id, storyId
 
 Template.planningSessionLive.helpers
-  'selectedStory': ->
+  selectedStory: ->
     storyId = @session.selectedStory
     Stories.findOne storyId
-  'sessionOwner': ->
+  sessionOwner: ->
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
     plan && plan.owner == Meteor.userId()
-  'votingOpen': ->
+  votingOpen: ->
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
     plan.votingOn == @_id
-  'storiesClass': ->
+  storiesClass: ->
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
     if plan && plan.owner == Meteor.userId()
       "panel-info"
     else
       "panel-default"
-  'activeStoryClass': ->
+  activeStoryClass: ->
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
     if plan && plan.selectedStory == @_id
       "active"
     else
       ""
-  'currentView': (view) ->
+  currentView: (view) ->
     Session.get('planningSessionLiveView') == view
-  'activeView': (view) ->
+  activeView: (view) ->
     if Session.get('planningSessionLiveView') == view
       return 'active'
+  storyVotes: ->
+    Votes.find().map (vote) ->
+      userName: Meteor.users.findOne(vote.owner).displayName
+      btnClass: if vote.status == 'casted' then 'btn-success' else 'btn-default'
+
 
 Template.memberItem.helpers
   onlineStatus: ->
