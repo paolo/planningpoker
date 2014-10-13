@@ -30,7 +30,6 @@ if Meteor.isServer
 
 if Meteor.isClient
   Tracker.autorun ->
-    console.log 'autorun'
     if Session.get('__planId')
       plan = PlanningSessions.findOne Session.get('__planId')
       if plan.selectedStory && plan.votingOn

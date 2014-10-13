@@ -46,6 +46,11 @@ Template.planningSessionLive.events
     currentUsers = Meteor.users.find().map (user) -> user._id
     if plan && plan.owner == Meteor.userId()
       Meteor.call "openVoting", plan._id, storyId, currentUsers
+  'submit form.vote-form': (evt) ->
+    evt.preventDefault()
+    vote = $(evt.target).find('select').val()
+    plan = PlanningSessions.findOne(Session.get('__planId'))
+    Meteor.call 'castVote', plan._id, plan.votingOn, vote
 
 Template.planningSessionLive.helpers
   selectedStory: ->
