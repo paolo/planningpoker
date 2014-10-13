@@ -44,7 +44,8 @@ Template.planningSessionLive.events
     storyId = $(evt.target).data('storyId')
     plan = PlanningSessions.findOne(Session.get('__planId'))
     if plan && plan.owner == Meteor.userId()
-      Meteor.call "openVoting", plan._id, storyId
+      Meteor.call "openVoting", plan._id, storyId, (error, result) ->
+        unless error then Meteor.subscribe 'votes', plan._id, storyId
 
 Template.planningSessionLive.helpers
   'selectedStory': ->
