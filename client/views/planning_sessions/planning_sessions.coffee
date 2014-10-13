@@ -46,6 +46,12 @@ Template.planningSessionLive.events
     currentUsers = Meteor.users.find().map (user) -> user._id
     if plan && plan.owner == Meteor.userId()
       Meteor.call "openVoting", plan._id, storyId, currentUsers
+  'click .pp-stop-voting': (evt) ->
+    evt.preventDefault()
+    storyId = $(evt.target).data('storyId')
+    plan = PlanningSessions.findOne(Session.get('__planId'))
+    if plan && plan.owner == Meteor.userId()
+      Meteor.call 'closeVoting', plan._id, storyId
   'submit form.vote-form': (evt) ->
     evt.preventDefault()
     vote = $(evt.target).find('select').val()

@@ -40,26 +40,29 @@ template(name="planningSessionLive")
                     .estimate-box #{estimate}
                   h2 #{name}
                   p #{description}
-                  +if votingOpen
-                    form.form.vote-form
-                      .form-group
-                        p: strong How would you rate this user story?
-                      .input-group
-                        select.form-control
-                          option 1
-                          option 2
-                          option 3
-                          option 5
-                          option 8
-                          option ?
-                        span.input-group-btn
-                          button.btn.btn-primary(type="submit") Vote!
-                    +each storyVotes
-                      span.voters.btn(class="{{btnClass}}") {{userName}}
-                  else
-                    +if sessionOwner
-                      p
-                        button.btn.btn-primary.pp-start-voting(data-story-id="{{_id}}") Start Voting!
+                  +if estimateable
+                    +if votingOpen
+                      +if sessionOwner
+                        p: button.btn.btn-danger.pp-stop-voting(data-story-id="{{_id}}") Stop Voting!
+                      form.form.vote-form
+                        .form-group
+                          p: strong How would you rate this user story?
+                        .input-group
+                          select.form-control
+                            option 1
+                            option 2
+                            option 3
+                            option 5
+                            option 8
+                            option ?
+                          span.input-group-btn
+                            button.btn.btn-primary(type="submit") Vote!
+                      +each storyVotes
+                        span.voters.btn(class="{{btnClass}}") {{userName}}
+                    else
+                      +if sessionOwner
+                        p
+                          button.btn.btn-primary.pp-start-voting(data-story-id="{{_id}}") Start Voting!
 
               else
                 h2 No user story selected yet

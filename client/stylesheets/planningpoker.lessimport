@@ -53,6 +53,10 @@ button.pp-start {
   }
 }
 
+.pp-start-voting, .pp-stop-voting {
+  width: 100%;
+}
+
 .estimate-box {
   position: absolute;
   top: 0;
