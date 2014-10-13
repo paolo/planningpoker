@@ -43,8 +43,9 @@ Template.planningSessionLive.events
     evt.preventDefault()
     storyId = $(evt.target).data('storyId')
     plan = PlanningSessions.findOne(Session.get('__planId'))
+    currentUsers = Meteor.users.find().map (user) -> user._id
     if plan && plan.owner == Meteor.userId()
-      Meteor.call "openVoting", plan._id, storyId, (error, result) ->
+      Meteor.call "openVoting", plan._id, storyId, currentUsers, (error, result) ->
         unless error then Meteor.subscribe 'votes', plan._id, storyId
 
 Template.planningSessionLive.helpers
@@ -81,7 +82,7 @@ Template.planningSessionLive.helpers
   storyVotes: ->
     Votes.find().map (vote) ->
       userName: Meteor.users.findOne(vote.owner).displayName
-      btnClass: if vote.status == 'casted' then 'btn-success' else 'btn-default'
+      btnClass: if vote.status == 'casted' then 'btn-success' else 'btn-primary'
 
 
 Template.memberItem.helpers
