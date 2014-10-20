@@ -71,6 +71,9 @@ if Meteor.isServer
         throw new Meteor.Error 404, 'No such user story'
       PlanningSessions.update planId, $set: votingOn: ''
       @unblock()
+      votes = Votes.find(planId: planId, storyId: storyId, closed: false).map (v) -> v._id
+      resultId = Meteor.call 'createResult', planId, storyId, votes
+      PlanningSessions.update planId, $set: lastResultId: resultId
       Votes.update planId: planId, storyId: storyId, closed: false,
         $set: closed: true
       ,
