@@ -89,10 +89,6 @@ Template.planningSessionLive.helpers
   activeView: (view) ->
     if Session.get('planningSessionLiveView') == view
       return 'active'
-  storyVotes: ->
-    Votes.find().map (vote) ->
-      userName: Meteor.users.findOne(vote.owner).displayName
-      btnClass: if vote.status == 'casted' then 'btn-success' else 'btn-primary'
 
 
 Template.memberItem.helpers
@@ -110,3 +106,13 @@ Template.memberItem.events
     Meteor.call "giveOwnership", Session.get('__planId'), $(evt.currentTarget).data('userId'), (err) ->
       unless err
         Notifier.info "Ownership delivered", "You're no longer the organizer of this session"
+
+Template.planningSessionVoting.helpers
+  storyVotes: ->
+    Votes.find().map (vote) ->
+      userName: Meteor.users.findOne(vote.owner).displayName
+      btnClass: if vote.status == 'casted' then 'btn-success' else 'btn-primary'
+  sessionOwner: ->
+    planId = Session.get '__planId'
+    plan = PlanningSessions.findOne planId
+    plan && plan.owner == Meteor.userId()
