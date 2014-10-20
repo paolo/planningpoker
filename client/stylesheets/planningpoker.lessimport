@@ -110,3 +110,30 @@ button.pp-start {
   color: darkred;
   &:before { content: "\e104"; }
 }
+
+.vote-value {
+  font-size: 180%;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.btn-vote-value {
+  border: 1px solid @gray-lighter;
+  background-color: white;
+  cursor: default;
+}
+
+.btn-vote-value:hover {
+  color: @text-color;
+}
+
+.btn-users {
+  margin-right: 5px;
+  background-color: @gray-lighter;
+  vertical-align: super;
+  cursor: default;
+}
+
+.btn-users:hover {
+  color: black;
+}

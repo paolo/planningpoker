@@ -1,0 +1,11 @@
+template(name="planningSessionResults")
+  p There results where:
+  +each results
+    p
+      +if sessionOwner
+        span.btn.btn-primary.vote-value #{value}
+      else
+        span.btn.btn-vote-value.vote-value #{value}
+      +each users
+        span.btn.btn-xs.btn-users #{this}
+      hr
