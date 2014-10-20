@@ -45,8 +45,12 @@ template(name="planningSessionLive")
                       +planningSessionVoting
                     else
                       +if sessionOwner
-                        p
-                          button.btn.btn-primary.pp-start-voting(data-story-id="{{_id}}") Start Voting!
+                        +if resultsOpen
+                          p: button.btn.btn-primary.pp-start-voting(data-story-id="{{_id}}") Vote Again
+                        else
+                          p: button.btn.btn-primary.pp-start-voting(data-story-id="{{_id}}") Start Voting!
+                      +if resultsOpen
+                        +planningSessionResults
 
               else
                 h2 No user story selected yet

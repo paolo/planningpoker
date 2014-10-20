@@ -70,6 +70,13 @@ Template.planningSessionLive.helpers
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
     plan.votingOn == @_id
+  resultsOpen: ->
+    planId = Session.get '__planId'
+    plan = PlanningSessions.findOne planId
+    if plan.lastResultId
+      VoteResults.findOne(plan.lastResultId).status == 'open'
+    else
+      false
   storiesClass: ->
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
@@ -112,6 +119,17 @@ Template.planningSessionVoting.helpers
     Votes.find().map (vote) ->
       userName: Meteor.users.findOne(vote.owner).displayName
       btnClass: if vote.status == 'casted' then 'btn-success' else 'btn-primary'
+  sessionOwner: ->
+    planId = Session.get '__planId'
+    plan = PlanningSessions.findOne planId
+    plan && plan.owner == Meteor.userId()
+
+Template.planningSessionResults.helpers
+  results: ->
+    planId = Session.get '__planId'
+    plan = PlanningSessions.findOne planId
+    result = VoteResults.findOne plan.lastResultId
+    result.votes
   sessionOwner: ->
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
