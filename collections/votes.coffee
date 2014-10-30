@@ -20,10 +20,12 @@ if Meteor.isServer
       if vote
         Votes.update vote._id, $set: value: value, status: 'casted'
       else
+        user = Meteor.users.findOne @userId
         Votes.insert
           planId: planId
           storyId: storyId
           owner: @userId
+          ownerName: user.displayName
           value: value
           status: 'casted'
           closed: false
