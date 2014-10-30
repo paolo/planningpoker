@@ -51,12 +51,15 @@ if Meteor.isServer
       PlanningSessions.update planId, $set: votingOn: storyId
       @unblock()
       _.each currentUsers, (userId) ->
+        user = Meteor.users.findOne userId
         Votes.insert
           planId: planId
           storyId: storyId
           owner: userId
+          ownerName: user.displayName
           status: 'open'
           closed: false
+          value: '?'
 
     closeVoting: (planId, storyId) ->
       if !@userId

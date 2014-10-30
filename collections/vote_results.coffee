@@ -27,7 +27,7 @@ if Meteor.isServer
               count: 0
               users: []
           results[vote.value].count += 1
-          results[vote.value].users.push vote.owner
+          results[vote.value].users.push vote.ownerName
         VoteResults.insert
           planId: planId
           storyId: storyId
