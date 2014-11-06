@@ -3,7 +3,7 @@ template(name="planningSessionResults")
   +each results
     p
       +if sessionOwner
-        span.btn.btn-primary.vote-value #{value}
+        button.btn.btn-primary.vote-value(data-value="{{value}}") #{value}
       else
         span.btn.btn-vote-value.vote-value #{value}
       +each users
