@@ -135,3 +135,10 @@ Template.planningSessionResults.helpers
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
     plan && plan.owner == Meteor.userId()
+
+Template.planningSessionResults.events
+  'click button.vote-value': (evt) ->
+    evt.preventDefault()
+    planId = Session.get '__planId'
+    value = parseInt $(evt.target).data('value')
+    Meteor.call 'selectResult', planId, value
