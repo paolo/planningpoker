@@ -24,7 +24,8 @@ Router.map () ->
 isLoggedIn = (pause) ->
   if !(Meteor.loggingIn() || Meteor.userId())
     @render 'login'
-    pause()
+  else
+    @next()
 
 Router.onBeforeAction isLoggedIn,
   only: [
