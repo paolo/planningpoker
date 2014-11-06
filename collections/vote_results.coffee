@@ -35,6 +35,21 @@ if Meteor.isServer
           status: 'open'
           selected: false
 
+    selectResult: (planId, value) ->
+      if !@userId
+        throw new Meteor.Error 401, 'Unable to access'
+      plan = PlanningSessions.findOne planId
+      if !plan
+        throw new Meteor.Error 404, 'Planning session not found'
+      if plan.owner != @userId
+        throw new Meteor.Error 403, 'Unauthorized'
+      VoteResults.update plan.lastResultId,
+        $set:
+          status: 'closed'
+          selected: value
+      voteResult = VoteResults.findOne plan.lastResultId
+      Stories.update voteResult.storyId, $set: estimate: value
+
   Meteor.publish "votesResult", (planId, voteResultsId) ->
     check planId, String
     if !@userId
