@@ -74,7 +74,8 @@ Template.planningSessionLive.helpers
     planId = Session.get '__planId'
     plan = PlanningSessions.findOne planId
     if plan.lastResultId
-      VoteResults.findOne(plan.lastResultId).status == 'open'
+      result = VoteResults.findOne plan.lastResultId
+      if result && result.status && result.storyId == @_id then result.status == 'open' else false
     else
       false
   storiesClass: ->
