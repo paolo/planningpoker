@@ -35,18 +35,20 @@ if Meteor.isServer
           status: 'open'
           selected: false
 
-  Meteor.publish "votesResult", (planId) ->
+  Meteor.publish "votesResult", (planId, voteResultsId) ->
     check planId, String
     if !@userId
       throw new Meteor.Error 401, 'unauthorized access'
     plan = PlanningSessions.findOne planId
     if !plan
       throw new Meteor.Error 404, 'planning session not found'
-    VoteResults.find _id: plan.lastResultId
+    VoteResults.find _id: voteResultsId
 
 if Meteor.isClient
   Tracker.autorun ->
     if Session.get('__planId')
-      plan = PlanningSessions.findOne Session.get('__planId')
-      if plan.lastResultId
-        Meteor.subscribe 'votesResult', plan._id
+      result = PlanningSessions.find Session.get('__planId')
+      if result.count() == 1
+        plan = result.fetch()[0]
+        if plan.lastResultId
+          Meteor.subscribe 'votesResult', plan._id, plan.lastResultId
