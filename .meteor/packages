@@ -10,10 +10,8 @@ accounts-base
 accounts-password
 http
 iron:router
-mrt:iron-router-progress
 mrt:moment
 kidovate:pnotify
 waitingkuo:jade
 nemo64:bootstrap
 mizzao:user-status
-

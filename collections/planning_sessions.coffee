@@ -40,6 +40,48 @@ if Meteor.isServer
         $set:
           owner: userId
 
+    openVoting: (planId, storyId, currentUsers) ->
+      if !@userId
+        throw new Meteor.Error 403, 'Unable to access'
+      plan = PlanningSessions.findOne planId
+      if !plan
+        throw new Meteor.Error 404, 'No such planning session'
+      if plan.owner != @userId
+        throw new Meteor.Error 401, 'Unauthorized operation'
+      PlanningSessions.update planId, $set: votingOn: storyId
+      @unblock()
+      _.each currentUsers, (userId) ->
+        user = Meteor.users.findOne userId
+        Votes.insert
+          planId: planId
+          storyId: storyId
+          owner: userId
+          ownerName: user.displayName
+          status: 'open'
+          closed: false
+          value: '?'
+
+    closeVoting: (planId, storyId) ->
+      if !@userId
+        throw new Meteor.Error 403, 'Unable to access'
+      plan = PlanningSessions.findOne planId
+      if !plan
+        throw new Meteor.Error 404, 'No such planning session'
+      if plan.owner != @userId
+        throw new Meteor.Error 401, 'Unauthorized operation'
+      story = Stories.findOne storyId
+      if !story
+        throw new Meteor.Error 404, 'No such user story'
+      votes = Votes.find(planId: planId, storyId: storyId, closed: false).map (v) -> v._id
+      resultId = Meteor.call 'createResult', planId, storyId, votes
+      Votes.update planId: planId, storyId: storyId, closed: false,
+        $set: closed: true
+      ,
+        multi: true
+      PlanningSessions.update planId, $set:
+        votingOn: ''
+        lastResultId: resultId
+
   # Publish a Planning session by id algon with the users connected to it
   Meteor.publish 'planningSession', (id) ->
     [

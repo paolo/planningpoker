@@ -32,13 +32,26 @@ template(name="planningSessionLive")
                   +story
 
         .col-xs-12.col-sm-8.col-md-6
-          .panel.panel-default
-            .panel-heading Current User Story
+          .panel.panel-default.story-view
             .panel-body
               +if session.selectedStory
                 +with selectedStory
+                  +if estimateable
+                    .estimate-box #{estimate}
                   h2 #{name}
                   p #{description}
+                  +if estimateable
+                    +if votingOpen
+                      +planningSessionVoting
+                    else
+                      +if sessionOwner
+                        +if resultsOpen
+                          p: button.btn.btn-primary.pp-start-voting(data-story-id="{{_id}}") Vote Again
+                        else
+                          p: button.btn.btn-primary.pp-start-voting(data-story-id="{{_id}}") Start Voting!
+                      +if resultsOpen
+                        +planningSessionResults
+
               else
                 h2 No user story selected yet
         .hidden-xs.hidden-sm.col-md-3

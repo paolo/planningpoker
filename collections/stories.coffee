@@ -4,6 +4,11 @@
 # Stories Collection
 @Stories = new Meteor.Collection "stories"
 
+Stories._transform = (story) ->
+  unless story.estimate
+    story.estimate = "?"
+  story
+
 # Server methods
 Meteor.methods
 
