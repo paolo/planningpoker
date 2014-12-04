@@ -40,9 +40,9 @@ class @PlanningSessionsController extends RouteController
   live: ->
     plan = PlanningSessions.findOne @params._id
     if plan && plan.started && !plan.closed
-      if @params.view && @params.view == "stories"
+      if @params.query? and @params.query.view? and @params.query.view is "stories"
         Session.set('planningSessionLiveView', 'stories')
-      else if @params.view && @params.view == "users"
+      else if @params.query? and @params.query.view? and @params.query.view is "users"
         Session.set('planningSessionLiveView', 'users')
       else
         Session.set('planningSessionLiveView', 'board')
