@@ -20,8 +20,8 @@ Meteor.methods
       headers = {}
       headers[PT.TOK_HEADER] = user.profile.pt.token
       if !@isSimulation
-        HTTP.get PT.API_URL + 'projects', {headers: headers}, (err, result) ->
-          if !err
+        HTTP.get PT.API_URL + 'projects', headers: headers, (err, result) ->
+          unless err
             projects = result.data
             _.each projects, (p) ->
               Projects.upsert

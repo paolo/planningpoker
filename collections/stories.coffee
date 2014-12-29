@@ -31,26 +31,27 @@ Meteor.methods
       headers = {}
       headers[PT.TOK_HEADER] = user.profile.pt.token
       filter = 'filter=state:unstarted,unscheduled'
-      if !@isSimulation
-        HTTP.get PT.API_URL + 'projects/' + project.externalId + '/stories?' + filter, {headers: headers}, (err, result) ->
-          if !err
-            stories = result.data
-            _.each stories, (s) ->
-              Stories.upsert
-                projectId: project._id
-                externalId: s.id
-              ,
-                $set:
-                  externalId: s.id
+      unless @isSimulation
+        HTTP.get PT.API_URL + 'projects/' + project.externalId + '/stories?' + filter,
+          headers: headers, (err, result) ->
+            unless err
+              stories = result.data
+              _.each stories, (s) ->
+                Stories.upsert
                   projectId: project._id
-                  storyType: s.story_type
-                  name: s.name
-                  description: s.description
-                  currentState: s.current_state
-                  url: s.url
-                  deadline: s.deadline
-                  estimateable: s.story_type == "feature"
-                  estimate: s.estimate
+                  externalId: s.id
+                ,
+                  $set:
+                    externalId: s.id
+                    projectId: project._id
+                    storyType: s.story_type
+                    name: s.name
+                    description: s.description
+                    currentState: s.current_state
+                    url: s.url
+                    deadline: s.deadline
+                    estimateable: s.story_type == 'feature'
+                    estimate: s.estimate
 
 # Stories publications
 if Meteor.isServer

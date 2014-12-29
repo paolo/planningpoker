@@ -41,8 +41,8 @@ Template.index.events
     id = PlanningSessions.insert
       name: moment().format 'L'
       owner: Meteor.userId()
+      started: false
     , (error) ->
-      if error
-        console.log error.reason
+        console.log error.reason if error
     if id
-      Router.go 'planningSessionEdit', {_id: id}
+      Router.go 'planningSessionEdit', _id: id

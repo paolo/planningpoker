@@ -7,16 +7,13 @@
 # Allow Rules
 @PlanningSessions.allow
   insert: (userId) ->
-    if !userId
-      throw Meteor.Error 403, 'You need to login to perform this operation'
+    throw Meteor.Error 403, 'Access forbidden' unless userId
     true
   update: (userId, doc) ->
-    if !userId || userId != doc.owner
-      throw Meteor.Error 403, 'You\'re not authorized to perform this operation'
+    throw Meteor.Error 403, 'Access forbidden' unless userId and userId is doc.owner
     true
   remove: (userId, doc) ->
-    if !userId || userId != doc.owner
-      throw Meteor.Error 403, 'You\'re not authorized to perform this operation'
+    throw Meteor.Error 403, 'Access forbidden' unless userId and userId is doc.owner
     true
 
 # Planning sessions publications
@@ -91,11 +88,11 @@ if Meteor.isServer
 
 if Meteor.isClient
   Tracker.autorun ->
-    if PlanningSessions.find().count() == 1
-      Session.set('__planId', PlanningSessions.findOne()._id)
+    if PlanningSessions.find().count() is 1
+      Session.set '__planId', PlanningSessions.findOne()._id
     else
-      Session.set('__planId', '')
+      Session.set '__planId', ''
     if Meteor.userId()
       Meteor.users.update Meteor.userId(),
         $set:
-          'profile.currentPlan': Session.get('__planId')
+          'profile.currentPlan': Session.get '__planId'
