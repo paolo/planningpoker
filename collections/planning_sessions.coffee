@@ -79,7 +79,7 @@ if Meteor.isServer
         votingOn: ''
         lastResultId: resultId
 
-  # Publish a Planning session by id algon with the users connected to it
+  # Publish a Planning session by id along with the users connected to it
   Meteor.publish 'planningSession', (id) ->
     [
       PlanningSessions.find(_id: id)
