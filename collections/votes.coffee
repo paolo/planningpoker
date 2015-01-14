@@ -14,9 +14,12 @@ if Meteor.isServer
 
   Meteor.methods
     castVote: (planId, storyId, value) ->
-      if !@userId
-        throw new Meteor.Error 401, 'Unable to access'
-      vote = Votes.findOne planId: planId, storyId: storyId, owner: @userId, closed: false
+      throw new Meteor.Error 401, 'Unable to access' unless @userId
+      vote = Votes.findOne
+        planId: planId
+        storyId: storyId
+        owner: @userId
+        closed: false
       if vote
         Votes.update vote._id, $set: value: value, status: 'casted'
       else
@@ -32,7 +35,7 @@ if Meteor.isServer
 
 if Meteor.isClient
   Tracker.autorun ->
-    if Session.get('__planId')
+    if Session.get '__planId'
       plan = PlanningSessions.findOne Session.get('__planId')
-      if plan.selectedStory && plan.votingOn
+      if plan.selectedStory and plan.votingOn
         Meteor.subscribe 'votes', plan._id, plan.selectedStory

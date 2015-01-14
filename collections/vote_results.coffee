@@ -7,16 +7,13 @@
 if Meteor.isServer
   Meteor.methods
     createResult: (planId, storyId, voteIds) ->
-      if !@userId
-        throw new Meteor.Error 401, 'Unable to access'
+      throw new Meteor.Error 401, 'Unable to access' unless @userId
       plan = PlanningSessions.findOne planId
-      if !plan
-        throw new Meteor.Error 404, 'Planning session not found'
-      if plan.owner != @userId
-        throw new Meteor.Error 403, 'Unauthorized operation'
+      throw new Meteor.Error 404, 'Planning session not found' unless plan
+      throw new Meteor.Error 403, 'Unauthorized operation' if plan.owner isnt @userId
       story = Stories.findOne storyId
-      if !story
-        throw new Meteor.Error 404, 'User story not found'
+      throw new Meteor.Error 404, 'User story not found' unless story
+
       if voteIds.length > 0
         votes = Votes.find $or: _.map(voteIds, (id) -> _id: id)
         results = {}
