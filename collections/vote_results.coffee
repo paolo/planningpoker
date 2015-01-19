@@ -33,12 +33,10 @@ if Meteor.isServer
           selected: false
 
     selectResult: (planId, value) ->
-      if !@userId
-        throw new Meteor.Error 401, 'Unable to access'
+      throw new Meteor.Error 401, 'Unable to access' unless @userId
       plan = PlanningSessions.findOne planId
-      if !plan
-        throw new Meteor.Error 404, 'Planning session not found'
-      if plan.owner != @userId
+      throw new Meteor.Error 404, 'Planning session not found' unless plan
+      if plan.owner isnt @userId
         throw new Meteor.Error 403, 'Unauthorized'
       VoteResults.update plan.lastResultId,
         $set:
