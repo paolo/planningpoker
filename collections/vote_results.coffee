@@ -33,10 +33,11 @@ if Meteor.isServer
           selected: false
 
     selectResult: (planId, value) ->
-      throw new Meteor.Error 401, 'Unable to access' unless @userId
+      user = Meteor.users.findOne @userId
+      throw new Meteor.Error 401, 'Unable to access' unless user
       plan = PlanningSessions.findOne planId
       throw new Meteor.Error 404, 'Planning session not found' unless plan
-      if plan.owner isnt @userId
+      if plan.owner isnt user._id
         throw new Meteor.Error 403, 'Unauthorized'
       VoteResults.update plan.lastResultId,
         $set:
@@ -44,6 +45,16 @@ if Meteor.isServer
           selected: value
       voteResult = VoteResults.findOne plan.lastResultId
       Stories.update voteResult.storyId, $set: estimate: value
+      @unblock()
+      story = Stories.findOne voteResult.storyId
+      project = Projects.findOne story.projectId
+      if user.profile.pt and user.profile.pt.token
+        headers = {}
+        headers[PT.TOK_HEADER] = user.profile.pt.token
+        HTTP.put "#{PT.API_URL}projects/#{project.externalId}/stories/#{story.externalId}",
+          headers: headers,data: estimate: story.estimate, (err) ->
+            console.log "Failed to store estimate: #{err.reason}" if err
+
 
   Meteor.publish "votesResult", (planId, voteResultsId) ->
     check planId, String
