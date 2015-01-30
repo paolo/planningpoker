@@ -23,15 +23,12 @@ if Meteor.isServer
   Meteor.methods
     giveOwnership: (planId, userId) ->
       owner = Meteor.user()
-      if !owner
-        throw new Meteor.Error 403, 'Unable to access'
+      throw new Meteor.Error 403, 'Unable to access' unless owner
       plan = PlanningSessions.findOne planId
-      if !plan
-        throw new Meteor.Error 404, 'No such planning session'
+      throw new Meteor.Error 404, 'No such planning session' unless plan
       user = Meteor.users.findOne userId
-      if !user
-        throw new Meteor.Error 404, 'No such user'
-      if plan.owner != owner._id
+      throw new Meteor.Error 404, 'No such user' unless user
+      if plan.owner isnt owner._id
         throw new Meteor.Error 401, 'Unauthorized operation'
       PlanningSessions.update planId,
         $set:
