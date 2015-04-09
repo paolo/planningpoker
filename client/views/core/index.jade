@@ -1,16 +1,21 @@
 template(name="index")
   .jumbotron
     .container-fluid.text-center
-      h1 Planning Poker!
+      h1 Agile Planner
       with loggedUser
-        p Host a new planning sessiong or join an existing one with your access code
+        p Who said planning can't be fun?
+        p Host a new
+          strong planning session
+          | or join an existing one with your access code
         p
           .col-xs-6.text-right
             a.btn.btn-primary.host Host
           .col-xs-6.text-left
             a.btn.btn-primary Join
       else
-        p Who said planning can't be fun? Create you account o login so you can start hosting your planning sessions
+        p Who said planning can't be fun?
+        p Create an account or login with an existing one,
+          | so you can start hosting your planning sessions
         p
           .col-xs-6.text-right
             a.btn.btn-primary(href="{{pathFor 'signUp'}}") Sing Up
@@ -20,11 +25,17 @@ template(name="index")
     .row
       .col-sm-4
         h2 Pick the topic to discuss
-        p Select the topic to be estimated, and present it to all your team members
+        p Agile Planner allows you to import your projects from
+          a(href="http://www.pivotaltracker.com") Pivotal Tracker
+          |. So you can select the user stories to present and estimate it with your team.
       .col-sm-4
         h2 Enjoy the Game!
-        p Take your pick from what you believe is the right estimate, and hope for the best
+        p Agile Planner brings
+          a(href="http://en.wikipedia.org/wiki/Planning_poker") Planning Poker
+          | to anyone on your team, So take your pick from what you believe is the right estimate,
+          | and hope for the best
       .col-sm-4
         h2 See the results
-        p Along with your tean you can see the results of the game, and discuss on them.
+        p You and all your team can see the results of the game, discuss on those result and
+          | finally, pick what the entire team agrees is the closest estimate.
     hr
