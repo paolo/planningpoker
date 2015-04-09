@@ -11,3 +11,6 @@ template(name="memberItem")
           +if sessionOwner
             a.make-organizer(href="#" data-user-id="{{member._id}}" title="Make Organizer")
               i.glyphicon.glyphicon-circle-arrow-up
+          else
+            +if isOrganizer
+              i.glyphicon.glyphicon-asterisk.text-success

@@ -13,8 +13,6 @@ template(name="planningSessionEdit")
         ul.nav.nav-tabs
           li.active
             a(href="#tab-pt", data-toggle="tab") Pivotal Tracker
-          li
-            a(href="#tab-ct", data-toggle="tab") Custom
         div.tab-content
           div#tab-pt.tab-pane.fade.active.in
             .form-group
@@ -23,7 +21,5 @@ template(name="planningSessionEdit")
                 option(disabled="true") Select a project from PivotalTracker
                 +each projects
                   option(value="{{_id}}") #{name}
-          div#tab-ct.tab-pane.fade
-            span Custom content
 
         button.pp-start.btn.btn-primary.btn-lg Start Now!

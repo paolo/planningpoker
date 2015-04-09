@@ -107,6 +107,9 @@ Template.memberItem.helpers
       "member-online"
   isMe: ->
     @member._id == Meteor.userId()
+  isOrganizer: ->
+    plan = PlanningSessions.findOne Session.get('__planId')
+    plan && plan.owner == @member._id
 
 Template.memberItem.events
   'click a.make-organizer': (evt) ->

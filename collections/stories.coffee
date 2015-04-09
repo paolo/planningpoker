@@ -46,7 +46,7 @@ Meteor.methods
                     projectId: project._id
                     storyType: s.story_type
                     name: s.name
-                    description: s.description
+                    description: s.description.replace(/(?:\r\n|\r|\n)/g, '<br />')
                     currentState: s.current_state
                     url: s.url
                     deadline: s.deadline
