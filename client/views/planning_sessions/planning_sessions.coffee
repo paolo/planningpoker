@@ -57,6 +57,11 @@ Template.planningSessionLive.events
     vote = $(evt.target).find('select').val()
     plan = PlanningSessions.findOne(Session.get('__planId'))
     Meteor.call 'castVote', plan._id, plan.votingOn, vote
+  # Refresh user stories
+  'click [data-action=refresh]': (evt) ->
+    evt.preventDefault
+    Meteor.call 'loadStories', @session._id, (err) ->
+      console.log !err
 
 Template.planningSessionLive.helpers
   selectedStory: ->

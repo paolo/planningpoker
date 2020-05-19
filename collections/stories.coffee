@@ -52,6 +52,7 @@ Meteor.methods
                     deadline: s.deadline
                     estimateable: s.story_type == 'feature'
                     estimate: s.estimate
+                    updatedAt: new Date
 
 # Stories publications
 if Meteor.isServer
@@ -61,7 +62,7 @@ if Meteor.isServer
   Meteor.publish "planStories", (planId) ->
     plan = PlanningSessions.findOne planId
     if plan && plan.projectId
-      project = Projects.findOne plan.projectId
+      project = Projects.findOne plan.projectId, { sort: [['updatedAt', 'asc']]}
       if project
         Stories.find
           projectId: project._id
