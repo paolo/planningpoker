@@ -2,8 +2,8 @@ html, body {
   height: 100%;
 }
 
-.navbar {
-  margin-bottom: 0px;
+.navbar.navbar-inverse.navbar-static-top {
+  margin-bottom: 0;
 }
 
 .bottom-nav {
@@ -136,4 +136,8 @@ button.pp-start {
 
 .btn-users:hover {
   color: black;
+}
+
+span.badge[data-action=refresh] {
+  cursor: pointer;
 }

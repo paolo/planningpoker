@@ -22,7 +22,10 @@ template(name="planningSessionLive")
       .row
         .hidden-xs.col-sm-4.col-md-3
           .list-group
-            .list-group-item.list-group-item-header User Stories
+            .list-group-item.list-group-item-header
+              +if sessionOwner
+                span.badge(data-action="refresh") refresh
+              | User Stories
             +each stories
               +if sessionOwner
                 a.list-group-item.story-item(href="#" class="{{activeStoryClass}}")
