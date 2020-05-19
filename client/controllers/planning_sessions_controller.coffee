@@ -24,7 +24,7 @@ Router.route '/plans/:_id/live',
   data: ->
     session: PlanningSessions.findOne @params._id
     project: Projects.findOne()
-    stories: Stories.find()
+    stories: Stories.find({}, sort: [['index', 'asc']])
     users: Meteor.users.find()
 
 class @PlanningSessionsController extends RouteController
