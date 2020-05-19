@@ -42,7 +42,8 @@ template(name="planningSessionLive")
                   +if estimateable
                     .estimate-box #{estimate}
                   h2 #{name}
-                  p !{description}
+                  +markdown
+                    #{description}
                   +if estimateable
                     +if votingOpen
                       +planningSessionVoting
