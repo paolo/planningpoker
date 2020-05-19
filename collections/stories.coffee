@@ -30,13 +30,19 @@ Meteor.methods
     if user.profile.pt && user.profile.pt.token
       headers = {}
       headers[PT.TOK_HEADER] = user.profile.pt.token
-      filter = 'filter=state:unstarted,unscheduled'
+      filter = 'filter=state:unstarted,unscheduled,started'
       unless @isSimulation
         HTTP.get PT.API_URL + 'projects/' + project.externalId + '/stories?' + filter,
           headers: headers, (err, result) ->
             unless err
+              Stories.update
+                projectId: project._id
+              ,
+                $set: index: -1
+              ,
+                multi: true
               stories = result.data
-              _.each stories, (s) ->
+              _.each stories, (s, idx) ->
                 Stories.upsert
                   projectId: project._id
                   externalId: s.id
@@ -46,13 +52,14 @@ Meteor.methods
                     projectId: project._id
                     storyType: s.story_type
                     name: s.name
-                    description: if s.description? then s.description.replace(/(?:\r\n|\r|\n)/g, '<br />') else ''
+                    description: s.description
                     currentState: s.current_state
                     url: s.url
                     deadline: s.deadline
                     estimateable: s.story_type == 'feature'
                     estimate: s.estimate
                     updatedAt: new Date
+                    index: idx
 
 # Stories publications
 if Meteor.isServer
@@ -62,7 +69,11 @@ if Meteor.isServer
   Meteor.publish "planStories", (planId) ->
     plan = PlanningSessions.findOne planId
     if plan && plan.projectId
-      project = Projects.findOne plan.projectId, { sort: [['updatedAt', 'asc']]}
+      project = Projects.findOne plan.projectId
       if project
         Stories.find
           projectId: project._id
+          currentState: $ne: 'started'
+          index: $gt: -1
+        ,
+          sort: [['index', 'asc']]
