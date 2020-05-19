@@ -63,11 +63,11 @@ button.pp-start {
   right: 0;
   width: 75px;
   height: 75px;
-  background-color: @btn-primary-bg;
-  color: @btn-primary-color;
+  background-color: white;
+  color: #446E9B;
   font-size: 50px;
   text-align: center;
-  border-bottom-left-radius: @border-radius-large;
+  border-bottom-left-radius: 0;
 }
 
 .vote-form {
@@ -118,18 +118,18 @@ button.pp-start {
 }
 
 .btn-vote-value {
-  border: 1px solid @gray-lighter;
+  border: 1px solid lightgray;
   background-color: white;
   cursor: default;
 }
 
 .btn-vote-value:hover {
-  color: @text-color;
+  color: #446E9B;
 }
 
 .btn-users {
   margin-right: 5px;
-  background-color: @gray-lighter;
+  background-color: lightgray;
   vertical-align: super;
   cursor: default;
 }
